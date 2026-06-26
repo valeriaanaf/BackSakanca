@@ -13,7 +13,7 @@ trait ApiResponse
         ], $code);
     }
 
-    protected function error(string, $message, $errors = null, int $code = 400)
+    protected function error(string $message, $errors = null, int $code = 400)
     {
         return response()->json([
             'success' => false,
