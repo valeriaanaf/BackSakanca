@@ -6,22 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hero extends Model
 {
-    protected $table = 'hero_sections';     // agar model membaca tabel hero_sections
+    protected $table = 'hero_sections';
 
     protected $fillable = [
-        'tagline',
-        'title',
+        'title1',
+        'title2',
         'subtitle',
-        'cta_primary_text',
-        'cta_primary_url',
-        'background_image',
+        'cta_primary',
+        'background_images',
         'is_active',
     ];
 
-    protected $casts = [
-        'tagline' => 'array',
-        'title' => 'array',
-        'subtitle' => 'array',
-        'is_active' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'subtitle' => 'array',
+            'cta_primary' => 'array',
+            'background_images' => 'array',
+            'is_active' => 'boolean',
+        ];
+    }
 }

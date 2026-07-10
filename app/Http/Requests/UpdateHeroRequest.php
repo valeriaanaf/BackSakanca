@@ -2,9 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-
 class UpdateHeroRequest extends BaseRequest
 {
     public function authorize(): bool
@@ -15,48 +12,27 @@ class UpdateHeroRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'tagline' => ['required', 'array'],
-            'tagline.id' => ['required', 'string', 'max:100'],
-            'tagline.en' => ['required', 'string', 'max:100'],
-            'tagline.jpn' => ['required', 'string', 'max:100'],
-
-            'title' => ['required', 'array'],
-            'title.id' => ['required', 'string', 'max:200'],
-            'title.en' => ['required', 'string', 'max:200'],
-            'title.jpn' => ['required', 'string', 'max:200'],
+            'title1' => ['required', 'string', 'max:100'],
+            'title2' => ['required', 'string', 'max:100'],
 
             'subtitle' => ['required', 'array'],
-            'subtitle.id' => ['required', 'string'],
-            'subtitle.en' => ['required', 'string'],
-            'subtitle.jpn' => ['required', 'string'],
+            'subtitle.ID' => ['required', 'string'],
+            'subtitle.EN' => ['required', 'string'],
+            'subtitle.JPN' => ['required', 'string'],
 
-            'cta_primary_text' => ['required', 'string', 'max:50'],
-            'cta_primary_url' => ['required', 'string', 'max:255'],
-            'background_image' => ['nullable', 'string', 'max:255'],
+            'cta_primary' => ['required', 'array'],
+            'cta_primary.url' => ['required', 'string', 'max:255'],
+            'cta_primary.text' => ['required', 'array'],
+            'cta_primary.text.ID' => ['required', 'string', 'max:50'],
+            'cta_primary.text.EN' => ['required', 'string', 'max:50'],
+            'cta_primary.text.JPN' => ['required', 'string', 'max:50'],
+
+            'background_images' => ['required', 'array', 'min:1'],
+            'background_images.*.src' => ['required', 'string', 'max:255'],
+            'background_images.*.alt' => ['required', 'string', 'max:255'],
+            'background_images.*.zoomType' => ['required', 'string', 'in:in,out'],
+
+            'is_active' => ['boolean'],
         ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'tagline.id.required' => 'Tagline bahasa Indonesia wajib diisi.',
-            'title.id.required' => 'Judul bahasa Indonesia wajib diisi.',
-        ];
-    }
-
-    /**
-     * Override ini supaya error validasi pakai format ApiResponse kita,
-     * bukan format default Laravel. Semua Form Request project ini
-     * harus override method ini untuk konsistensi.
-     */
-    protected function failedValidation(Validator $validator): void
-    {
-        throw new HttpResponseException(
-            response()->json([
-                'success' => false,
-                'message' => 'Validasi gagal. Periksa kembali input kamu.',
-                'errors' => $validator->errors(),
-            ], 422)
-        );
     }
 }

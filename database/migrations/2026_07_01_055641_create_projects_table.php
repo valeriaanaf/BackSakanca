@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            // FK yang mengarah ke service id dengan pengaman RESTRICT
             $table->foreignId('service_id')->constrained('services')->onDelete('restrict');
             $table->string('title', 200);
             $table->jsonb('description');
             $table->string('thumbnail', 255);
             $table->string('url', 255)->nullable();
             $table->integer('year');
+            $table->boolean('is_featured')->default(false);
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

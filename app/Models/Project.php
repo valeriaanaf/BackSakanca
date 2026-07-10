@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Project extends Model
 {
-    public function service(): BelongsTo
-    {
-        return $this->belongsTo(Service::class);
-    }
-
     protected $fillable = [
         'service_id',
         'title',
@@ -19,12 +14,19 @@ class Project extends Model
         'thumbnail',
         'url',
         'year',
+        'is_featured',
         'order',
         'is_active',
     ];
 
     protected $casts = [
         'description' => 'array',
+        'is_featured' => 'boolean',
         'is_active' => 'boolean',
     ];
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

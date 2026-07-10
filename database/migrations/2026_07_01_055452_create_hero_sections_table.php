@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('hero_sections');
+
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->id();
-            $table->jsonb('tagline');
-            $table->jsonb('title');
+            $table->string('title1', 100);
+            $table->string('title2', 100);
             $table->jsonb('subtitle');
-            $table->string('cta_primary_text', 50);
-            $table->string('cta_primary_url', 255);
-            $table->string('background_image', 255)->nullable();
+            $table->jsonb('cta_primary');
+            $table->jsonb('background_images');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

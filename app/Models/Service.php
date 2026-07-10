@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
-    public function projects(): HasMany
-    {
-        return $this->hasMany(Project::class);
-    }
+    protected $table = 'services';
 
     protected $fillable = [
         'name',
         'slug',
         'logo',
+        'image',
         'description',
         'color_theme',
         'order',
@@ -23,7 +21,12 @@ class Service extends Model
     ];
 
     protected $casts = [
-        'description' => 'array',
+        'description' => 'array', // Hanya description yang di-cast sebagai JSONB multi-bahasa
         'is_active' => 'boolean',
     ];
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
 }

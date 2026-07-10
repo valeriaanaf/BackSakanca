@@ -14,7 +14,6 @@ class HeroController extends Controller
     public function index()
     {
         $hero = Hero::where('is_active', true)->first();
-
         if (! $hero) {
             return $this->error('Data hero belum tersedia', null, 404);
         }

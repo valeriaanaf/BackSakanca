@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class About extends Model
 {
-    protected $table = 'about_sections'; // agar model membaca tabel about_sections
+    protected $table = 'about_sections';
 
     protected $fillable = [
-        'title',
+        'title1',
+        'title2',
         'description',
         'logo',
         'background_image',
     ];
 
     protected $casts = [
-        'title' => 'array',
-        'description' => 'array',
+        'description' => 'array', // hanya description yang jsonb
     ];
 }
