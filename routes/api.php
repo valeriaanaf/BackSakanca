@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\DetailedServiceController;
 use App\Http\Controllers\Api\GalleryItemController;
 use App\Http\Controllers\Api\HeroController;
 use App\Http\Controllers\Api\ProjectController;
@@ -27,6 +28,7 @@ Route::prefix('v1')->group(function () {
     Route::get('/team-members', [TeamMemberController::class, 'index']);
     Route::get('/team-members/{id}', [TeamMemberController::class, 'show']);
     Route::get('/services', [ServiceController::class, 'index']);
+    Route::get('/detailed-services', [DetailedServiceController::class, 'index']);
     Route::get('/gallery-items', [GalleryItemController::class, 'index']);
     Route::get('/projects', [ProjectController::class, 'index']);
     Route::get('/testimonials', [TestimonialController::class, 'index']);
@@ -42,6 +44,7 @@ Route::prefix('v1')->group(function () {
         // CRUD Data Dinamis Konten
         Route::apiResource('team-members', TeamMemberController::class)->except(['index', 'show']);
         Route::apiResource('services', ServiceController::class)->except(['index']);
+        Route::apiResource('detailed-services', DetailedServiceController::class)->except(['index']);
         Route::apiResource('gallery-items', GalleryItemController::class)->except(['index']);
         Route::apiResource('projects', ProjectController::class)->except(['index']);
         Route::apiResource('testimonials', TestimonialController::class)->except(['index']);

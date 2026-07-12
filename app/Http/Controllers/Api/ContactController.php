@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateContactRequest;
 
 class ContactController extends Controller
 {
@@ -20,19 +21,9 @@ class ContactController extends Controller
     }
 
     // Diakses Pengunjung (Public) untuk kirim pesan lewat form kontak website
-    public function store(Request $request)
+    public function store(UpdateContactRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:150',
-            'phone' => 'nullable|string|max:20',
-            'subject' => 'nullable|string|max:255',
-            'message' => 'required|string|min:10',
-        ]);
-
-        ContactMessage::create($validated);
-
-        // Response konfirmasi tipis tanpa mengembalikan isi data sensitif sesuai roadmap
+        ContactMessage::create($request->validated());
         return $this->success(null, 'Pesan kamu berhasil dikirim, terima kasih ya!');
     }
 

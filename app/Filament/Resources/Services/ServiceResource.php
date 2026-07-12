@@ -6,7 +6,6 @@ use App\Filament\Resources\Services\Pages\CreateService;
 use App\Filament\Resources\Services\Pages\EditService;
 use App\Filament\Resources\Services\Pages\ListServices;
 use App\Filament\Resources\Services\Schemas\ServiceForm;
-use App\Filament\Resources\Services\Schemas\ServiceInfolist;
 use App\Filament\Resources\Services\Tables\ServicesTable;
 use App\Models\Service;
 use BackedEnum;
@@ -17,20 +16,15 @@ use Filament\Tables\Table;
 
 class ServiceResource extends Resource
 {
-    protected static ?string $model = Service::class; // KOREKSI: Tambahkan keyword static ?string
+    protected static ?string $model = Service::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Service';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema
     {
         return ServiceForm::configure($schema);
-    }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return ServiceInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

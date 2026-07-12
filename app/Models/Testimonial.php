@@ -8,7 +8,6 @@ class Testimonial extends Model
 {
     protected $fillable = [
         'client_name',
-        'client_photo',
         'content',
         'rating',
         'is_active',
@@ -16,7 +15,7 @@ class Testimonial extends Model
     ];
 
     protected $casts = [
-        'content' => 'array',
+        'content'   => 'array',   // jsonb i18n
         'is_active' => 'boolean',
     ];
 }

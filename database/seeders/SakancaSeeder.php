@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\About;
 use App\Models\Hero;
 use App\Models\TeamMember;
+use App\Models\Service;
+use App\Models\DetailedService;
 use Illuminate\Database\Seeder;
 
 class SakancaSeeder extends Seeder
@@ -44,7 +46,7 @@ class SakancaSeeder extends Seeder
         );
 
         // ==========================================
-        //                  SEEDER ABOUT
+        //               SEEDER ABOUT
         // ==========================================
         About::updateOrCreate(
             ['id' => 1],
@@ -62,7 +64,179 @@ class SakancaSeeder extends Seeder
         );
 
         // ==========================================
-        //              SEEDER TEAM MEMBERS
+        // SEEDER MODUL SERVICES & DETAILED SERVICES
+        // ==========================================
+
+        // --- 1. SAKANCA VISUAL ---
+        $visual = Service::updateOrCreate(
+            ['slug' => 'sakanca-visual'],
+            [
+                'title' => 'Sakanca Visual',
+                'image' => '/images/logo/logoSakancaVisual.webp',
+                'color' => 'from-amber-400 to-orange-500',
+                'col' => 'left',
+                'order' => 1,
+                'is_active' => true
+            ]
+        );
+        DetailedService::updateOrCreate(
+            ['service_id' => $visual->id],
+            [
+                'title_line1' => 'S A K A N C A',
+                'title_line2' => 'V I S U A L',
+                'bg_image' => '/images/det/detVisual.webp',
+                'order' => 1,
+                'is_active' => true,
+                'description' => [
+                    'ID' => 'Sakanca Visual adalah divisi yang bergerak di bidang videografi, fotografi, dan produksi konten kreatif. Kami membantu mengabadikan setiap momen sekaligus menciptakan visual yang menarik untuk kebutuhan promosi, branding, dokumentasi acara, hingga media sosial dengan hasil yang profesional dan berkualitas.',
+                    'EN' => 'Sakanca Visual specializes in videography, photography, and creative content production. We help capture every moment while producing compelling visuals for promotion, branding, event documentation, and social media with professional, high-quality results.',
+                    'JPN' => 'Sakanca Visualはビデオグラフィー、写真撮影、クリエイティブコンテンツ制作を担当しています。プロモーション、ブランディング、イベント記録、SNS用に高品質で魅力的なビジュアルを提供します。'
+                ]
+            ]
+        );
+
+        // --- 2. SAKANCA AUTO ---
+        $auto = Service::updateOrCreate(
+            ['slug' => 'sakanca-auto'],
+            [
+                'title' => 'Sakanca Auto',
+                'image' => '/images/logo/logoSakancaAuto.webp',
+                'color' => 'from-blue-400 to-indigo-600',
+                'col' => 'right',
+                'order' => 2,
+                'is_active' => true
+            ]
+        );
+        DetailedService::updateOrCreate(
+            ['service_id' => $auto->id],
+            [
+                'title_line1' => 'S A K A N C A',
+                'title_line2' => '    A U T O',
+                'bg_image' => '/images/det/detAuto.webp',
+                'order' => 2,
+                'is_active' => true,
+                'description' => [
+                    'ID' => 'Sakanca Auto menyediakan layanan otomotif profesional yang mencakup kustomisasi motor, pemasangan aksesori, hingga konsultasi kendaraan dengan mengutamakan presisi dan kualitas.',
+                    'EN' => 'Sakanca Auto provides professional automotive services including motorcycle customization, accessory installation, and vehicle consultation, prioritizing precision and quality.',
+                    'JPN' => 'Sakanca Autoは、バイクのカスタマイズ、アクセサリー取り付け、車両のご相談まで自動車関連サービスを提供します。品質と精度を最優先し、お客様のスタイルに合わせた仕上がりをお届けします。'
+                ]
+            ]
+        );
+
+        // --- 3. SAKANCA ESCAPE ---
+        $escape = Service::updateOrCreate(
+            ['slug' => 'sakanca-escape'],
+            [
+                'title' => 'Sakanca Escape',
+                'image' => '/images/logo/logoSakancaEscape.webp',
+                'color' => 'from-emerald-400 to-teal-600',
+                'col' => 'left',
+                'order' => 3,
+                'is_active' => true
+            ]
+        );
+        DetailedService::updateOrCreate(
+            ['service_id' => $escape->id],
+            [
+                'title_line1' => 'S A K A N C A',
+                'title_line2' => 'E S C A P E',
+                'bg_image' => '/images/det/detEscape.webp',
+                'order' => 3,
+                'is_active' => true,
+                'description' => [
+                    'ID' => 'Sakanca Escape menyediakan layanan perjalanan dan tur wisata di Yogyakarta, mulai dari tur keliling kota hingga rencana perjalanan kustom untuk memastikan liburan Anda nyaman dan menyenangkan.',
+                    'EN' => 'Sakanca Escape provides travel and tour services in Yogyakarta, ranging from city tours to custom itineraries to ensure your holiday is comfortable and memorable.',
+                    'JPN' => 'Sakanca Escapeは、ジョグジャカルタでの印象的な旅行・ツアーサービスを提供します。シティツアーからカスタム旅行まで、快適で安全かつ楽しい旅をサポートします。'
+                ]
+            ]
+        );
+
+        // --- 4. SAKANCA TECH ---
+        $tech = Service::updateOrCreate(
+            ['slug' => 'sakanca-tech'],
+            [
+                'title' => 'Sakanca Tech',
+                'image' => '/images/logo/logoSakancaTech.webp',
+                'color' => 'from-cyan-400 to-blue-500',
+                'col' => 'right',
+                'order' => 4,
+                'is_active' => true
+            ]
+        );
+        DetailedService::updateOrCreate(
+            ['service_id' => $tech->id],
+            [
+                'title_line1' => 'S A K A N C A',
+                'title_line2' => 'T E C H',
+                'bg_image' => '/images/det/detTech.webp',
+                'order' => 4,
+                'is_active' => true,
+                'description' => [
+                    'ID' => 'Sakanca Tech melayani penjualan laptop, komputer desktop, komponen PC, serta perangkat pendukung lainnya dengan garansi resmi dan layanan konsultasi pemilihan spesifikasi perangkat.',
+                    'EN' => 'Sakanca Tech provides sales of laptops, desktop computers, PC parts, and peripherals with official warranties and expert consulting services to choose the device that best fits your needs.',
+                    'JPN' => 'Sakanca Techは、ノートPC、デスクトップ、PCパーツ、周辺機器の販売を行っています。学習、仕事、ビジネスに最適な機器選びを専門的なコンサルティングと共にサポートします。'
+                ]
+            ]
+        );
+
+        // --- 5. SAKANCA DEV ---
+        $dev = Service::updateOrCreate(
+            ['slug' => 'sakanca-dev'],
+            [
+                'title' => 'Sakanca Dev',
+                'image' => '/images/logo/logoSakancadev.webp',
+                'color' => 'from-pink-500 to-purple-600',
+                'col' => 'left',
+                'order' => 5,
+                'is_active' => true
+            ]
+        );
+        DetailedService::updateOrCreate(
+            ['service_id' => $dev->id],
+            [
+                'title_line1' => 'S A K A N C A',
+                'title_line2' => 'D E V',
+                'bg_image' => '/images/det/detDev.webp',
+                'order' => 5,
+                'is_active' => true,
+                'description' => [
+                    'ID' => 'Sakanca Dev berfokus pada pengembangan website inovatif, aplikasi web kustom, serta sistem informasi manajemen terintegrasi untuk mendukung efisiensi bisnis Anda di era digital.',
+                    'EN' => 'Sakanca Dev focuses on developing innovative websites, custom applications, and integrated management information systems to drive your business efficiency in the digital era.',
+                    'JPN' => 'Sakanca Devは、革新的なウェブサイト、アプリケーション、情報システムの開発に特化しています。デジタル時代におけるビジネスの効率化と品質向上を実現するカスタムソリューションを提供します。'
+                ]
+            ]
+        );
+
+        // --- 6. SAKANCA PET ---
+        $pet = Service::updateOrCreate(
+            ['slug' => 'sakanca-pet'],
+            [
+                'title' => 'Sakanca Pet',
+                'image' => '/images/logo/logoSakancaPet.webp',
+                'color' => 'from-rose-400 to-red-500',
+                'col' => 'right',
+                'order' => 6,
+                'is_active' => true
+            ]
+        );
+        DetailedService::updateOrCreate(
+            ['service_id' => $pet->id],
+            [
+                'title_line1' => 'S A K A N C A',
+                'title_line2' => 'P E T',
+                'bg_image' => '/images/det/detPet.webp',
+                'order' => 6,
+                'is_active' => true,
+                'description' => [
+                    'ID' => 'Sakanca Pet menyediakan layanan grooming hewan peliharaan, penginapan hewan peliharaan dengan fasilitas lengkap, serta makanan premium untuk memberikan kenyamanan dan kasih sayang terbaik bagi hewan kesayangan Anda.',
+                    'EN' => 'Sakanca Pet offers professional pet grooming, fully-equipped pet boarding, and premium food selection to deliver the highest comfort and love for your beloved pets.',
+                    'JPN' => 'Sakanca Petは、ペットのグルーミング、充実した設備を備えたペットホテル、プレミアムフードを提供し、大切なペットに最高の快適さと愛情をお届けします。'
+                ]
+            ]
+        );
+        
+        // ==========================================
+        //       SEEDER TEAM MEMBERS / PROFILE
         // ==========================================
 
         // --- TAZAR AL GHAFFAR ---
@@ -244,5 +418,24 @@ class SakancaSeeder extends Seeder
                 'is_active' => true,
             ]
         );
+
+// ==========================================
+        //            SEEDER SITE SETTINGS
+        // ==========================================
+        $settings = [
+            'site_name' => 'Sakanca Alliance',
+            'site_logo' => '/images/logo/logoSakanca.webp',
+            'footer_description' => 'Ekosistem kolaboratif yang menyatukan layanan kreatif, teknologi, otomotif, dan pengalaman wisata dalam satu jaringan.',
+            'footer_email' => 'hello@sakanca.com',
+            'footer_phone' => '+62 812-3456-7890',
+            'footer_address' => 'Yogyakarta, Indonesia',
+            'social_instagram' => 'https://instagram.com/sakanca.alliance',
+            'social_tiktok' => 'https://tiktok.com/@sakanca.alliance',
+            'social_email' => 'mailto:hello@sakanca.com',
+        ];
+
+        foreach ($settings as $key => $value) {
+            \App\Models\SiteSetting::updateOrCreate(['key' => $key], ['value' => $value]);
+        }
     }
 }

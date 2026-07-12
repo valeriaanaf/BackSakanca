@@ -3,12 +3,11 @@
 namespace App\Filament\Resources\Services\Schemas;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class ServiceForm
 {
@@ -16,62 +15,38 @@ class ServiceForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->label('Nama Layanan / Divisi')
+                TextInput::make('title')
+                    ->label('Nama Layanan (Statis)')
                     ->required()
-                    ->maxLength(100),
+                    ->maxLength(100)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (string $operation, $state, callable $set) => 
+                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                    ),
 
                 TextInput::make('slug')
-                    ->label('Slug URL (Otomatis/Manual)')
+                    ->label('URL Slug')
                     ->required()
-                    ->maxLength(150),
-
-                Tabs::make('Deskripsi Layanan Multi-Bahasa')
-                    ->tabs([
-                        Tab::make('Indonesia')
-                            ->schema([
-                                Textarea::make('description.ID')
-                                    ->label('Deskripsi (ID)')
-                                    ->required(),
-                            ]),
-                        Tab::make('English')
-                            ->schema([
-                                Textarea::make('description.EN')
-                                    ->label('Description (EN)')
-                                    ->required(),
-                            ]),
-                        Tab::make('日本語')
-                            ->schema([
-                                Textarea::make('description.JPN')
-                                    ->label('説明 (JPN)')
-                                    ->required(),
-                            ]),
-                    ])
-                    ->columnSpanFull(),
-
-                TextInput::make('logo')
-                    ->label('Icon Class (Contoh: bx-code-alt)')
-                    ->maxLength(255),
+                    ->unique(ignoreRecord: true),
 
                 FileUpload::make('image')
-                    ->label('Service Image (Detailed Section Banner)')
+                    ->label('Logo Kotak Layanan (Grid)')
                     ->image()
-                    ->directory('services'),
+                    ->directory('service-logos'),
 
-                TextInput::make('color_theme')
-                    ->label('Color Theme Hex/Class')
-                    ->maxLength(50),
+                TextInput::make('color')
+                    ->label('Gradient Color Fallback')
+                    ->placeholder('from-amber-400 to-orange-500'),
 
-                TextInput::make('order')
-                    ->label('Urutan Tampilan')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
+                Select::make('col')
+                    ->label('Posisi Kolom Grid')
+                    ->options([
+                        'left' => 'Kiri (Left)',
+                        'right' => 'Kanan (Right)',
+                    ])->required(),
 
-                Toggle::make('is_active')
-                    ->label('Aktifkan Layanan')
-                    ->required()
-                    ->default(true),
+                TextInput::make('order')->numeric()->default(0),
+                Toggle::make('is_active')->default(true),
             ]);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Services\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction; // SINKRON: Menggunakan namespace actions valid sesuai environment proyek Anda
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -17,17 +16,18 @@ class ServicesTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                ImageColumn::make('image')
+                    ->label('Logo'),
+                TextColumn::make('title')
                     ->label('Nama Layanan')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')
                     ->label('Slug')
                     ->searchable(),
-                TextColumn::make('logo')
-                    ->label('Icon Class'),
-                ImageColumn::make('image')
-                    ->label('Banner'),
+                TextColumn::make('col')
+                    ->label('Posisi Kolom')
+                    ->badge(),
                 IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean(),
@@ -36,9 +36,9 @@ class ServicesTable
                     ->numeric()
                     ->sortable(),
             ])
+            ->defaultSort('order')
             ->filters([])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

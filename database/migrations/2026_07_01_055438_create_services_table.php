@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100); // Nama divisi tetap (Statis/String murni)
-            $table->string('slug', 150)->unique();
-            $table->string('logo', 255)->nullable(); // Untuk icon class Next.js
-            $table->string('image', 255)->nullable(); // Untuk gambar DetailedServiceSection
-            $table->jsonb('description')->nullable(); // Konten penjelasan multi-bahasa
-            $table->string('color_theme', 50)->nullable();
+            $table->string('title', 100); 
+            $table->string('slug', 100)->unique();
+            $table->string('image', 255)->nullable();
+            $table->string('color', 100)->nullable();
+            $table->enum('col', ['left', 'right'])->default('left');
             $table->integer('order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

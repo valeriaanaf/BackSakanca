@@ -3,16 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Http\BaseRequest;
 
-class UpdateSiteSettingRequest extends FormRequest
+class UpdateSiteSettingRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class UpdateSiteSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'value' => ['nullable', 'string'],
         ];
     }
 }
