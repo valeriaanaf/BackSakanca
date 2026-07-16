@@ -2,9 +2,14 @@
 
 namespace App\Filament\Resources\Projects\Schemas;
 
+use App\Models\Service;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 
 class ProjectForm
@@ -14,27 +19,62 @@ class ProjectForm
         return $schema
             ->components([
                 Select::make('service_id')
-                    ->relationship('service', 'name')
+                    ->label('Sakanca (Brand)')
+                    ->options(fn () => Service::pluck('name', 'id'))
+                    ->searchable()
+                    ->preload()
                     ->required(),
-                TextInput::make('title')
+
+                Tabs::make('Nama & Deskripsi')
+                    ->tabs([
+                        Tab::make('Indonesia')
+                            ->schema([
+                                TextInput::make('name.ID')
+                                    ->label('Nama Project (ID)')
+                                    ->required(),
+                                Textarea::make('description.ID')
+                                    ->label('Deskripsi (ID)')
+                                    ->required(),
+                            ]),
+                        Tab::make('English')
+                            ->schema([
+                                TextInput::make('name.EN')
+                                    ->label('Nama Project (EN)')
+                                    ->required(),
+                                Textarea::make('description.EN')
+                                    ->label('Description (EN)')
+                                    ->required(),
+                            ]),
+                        Tab::make('日本語')
+                            ->schema([
+                                TextInput::make('name.JPN')
+                                    ->label('Nama Project (JPN)')
+                                    ->required(),
+                                Textarea::make('description.JPN')
+                                    ->label('Deskripsi (JPN)')
+                                    ->required(),
+                            ]),
+                    ])
+                    ->columnSpanFull(),
+
+                FileUpload::make('thumbnail')
+                    ->label('Thumbnail')
+                    ->image()
+                    ->directory('project-thumbnails')
                     ->required(),
-                TextInput::make('description')
-                    ->required(),
-                TextInput::make('thumbnail')
-                    ->required(),
+
                 TextInput::make('url')
+                    ->label('URL Eksternal (Opsional)')
                     ->url(),
-                TextInput::make('year')
-                    ->required()
-                    ->numeric(),
-                Toggle::make('is_featured')
-                    ->required(),
+
                 TextInput::make('order')
-                    ->required()
+                    ->label('Urutan')
                     ->numeric()
                     ->default(0),
+
                 Toggle::make('is_active')
-                    ->required(),
+                    ->label('Aktif')
+                    ->default(true),
             ]);
     }
 }

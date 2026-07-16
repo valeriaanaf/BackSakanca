@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('hero_sections');
-
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('title1', 100);
-            $table->string('title2', 100);
-            $table->jsonb('subtitle');
-            $table->jsonb('cta_primary');
-            $table->jsonb('background_images');
+            $table->string('title1', 100);             // SHARED IDEAS
+            $table->string('title2', 100);             // ONE ALLIANCE
+            $table->jsonb('subtitle');                      // Your Collective Expert Creating Solutions That Matter
+
+            $table->jsonb('cta_primary');                   // Mulai Sekarang/Get Started
+
+            $table->jsonb('background_images');              // Background Images 3 foto
+
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

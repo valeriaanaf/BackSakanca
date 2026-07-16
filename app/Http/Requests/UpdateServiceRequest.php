@@ -11,11 +11,12 @@ class UpdateServiceRequest extends BaseRequest
 
     public function rules(): array
     {
+        $serviceId = $this->route('service')?->id;
+
         return [
-            'title' => ['required', 'string', 'max:100'],
-            'slug' => ['required', 'string', 'max:100'],
-            'image' => ['nullable', 'string', 'max:255'],
-            'color' => ['nullable', 'string', 'max:100'],
+            'slug' => ['required', 'string', 'max:50', 'unique:services,slug,'.$serviceId],
+            'name' => ['required', 'string', 'max:100', 'unique:services,name,'.$serviceId],
+            'logo' => ['nullable', 'string', 'max:255'],
             'col' => ['required', 'in:left,right'],
             'order' => ['integer'],
             'is_active' => ['boolean'],
@@ -25,8 +26,10 @@ class UpdateServiceRequest extends BaseRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Nama layanan wajib diisi.',
-            'slug.required' => 'Slug URL wajib ditentukan.',
+            'slug.required' => 'Slug layanan wajib diisi.',
+            'slug.unique' => 'Slug layanan sudah dipakai, gunakan slug lain.',
+            'name.required' => 'Nama layanan wajib diisi.',
+            'name.unique' => 'Nama layanan sudah dipakai, gunakan nama lain.',
             'col.in' => 'Posisi kolom hanya boleh left atau right.',
         ];
     }

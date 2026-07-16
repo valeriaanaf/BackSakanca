@@ -22,6 +22,7 @@ class UpdateHeroRequest extends BaseRequest
 
             'cta_primary' => ['required', 'array'],
             'cta_primary.url' => ['required', 'string', 'max:255'],
+
             'cta_primary.text' => ['required', 'array'],
             'cta_primary.text.ID' => ['required', 'string', 'max:50'],
             'cta_primary.text.EN' => ['required', 'string', 'max:50'],

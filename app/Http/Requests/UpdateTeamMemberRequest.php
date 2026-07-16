@@ -13,24 +13,28 @@ class UpdateTeamMemberRequest extends BaseRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
-            'username' => ['required', 'string', 'max:100'],
-            'surname' => ['nullable', 'string', 'max:100'],
+            'surname' => ['required', 'string', 'max:100'],
 
-            'role' => ['required', 'array'],
-            'role.ID' => ['required', 'string'],
-            'role.EN' => ['required', 'string'],
-            'role.JPN' => ['required', 'string'],
+            'focus' => ['required', 'array'],
+            'focus.ID' => ['required', 'string'],
+            'focus.EN' => ['required', 'string'],
+            'focus.JPN' => ['required', 'string'],
 
-            'description1' => ['nullable', 'array'],
-            'description2' => ['nullable', 'array'],
+            'description1' => ['required', 'array'],
+            'description1.ID' => ['required', 'string'],
+            'description1.EN' => ['required', 'string'],
+            'description1.JPN' => ['required', 'string'],
 
-            'skills' => ['nullable', 'array'],
-            'focus' => ['nullable', 'array'],
-            'tools' => ['nullable', 'string', 'max:100'],
-            'style' => ['nullable', 'array'],
+            'description2' => ['required', 'array'],
+            'description2.ID' => ['required', 'string'],
+            'description2.EN' => ['required', 'string'],
+            'description2.JPN' => ['required', 'string'],
 
-            'photo' => ['nullable', 'string', 'max:255'],
-            'background_image' => ['nullable', 'string', 'max:255'],
+            'skills' => ['required', 'array', 'min:1'],
+            'skills.*' => ['required', 'string', 'max:50'],
+
+            'photo' => ['required', 'string', 'max:255'],
+            'background_image' => ['required', 'string', 'max:255'],
 
             'instagram_url' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'string', 'max:255'],

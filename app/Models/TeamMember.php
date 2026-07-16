@@ -10,32 +10,31 @@ class TeamMember extends Model
 
     protected $fillable = [
         'name',
-        'username',
         'surname',
-        'role',
+
+        'focus',
         'description1',
         'description2',
+
         'skills',
-        'focus',
-        'tools',
-        'style',
+
         'photo',
         'background_image',
+
         'instagram_url',
         'email',
         'github_url',
         'linkedin_url',
+
         'order',
         'is_active',
     ];
 
     protected $casts = [
-        'role' => 'array',
+        'focus' => 'array',
         'description1' => 'array',
         'description2' => 'array',
         'skills' => 'array', // Cast array agar Filament membaca TagsInput/Tags otomatis
-        'focus' => 'array',
-        'style' => 'array',
         'is_active' => 'boolean',
     ];
 }

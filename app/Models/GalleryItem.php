@@ -7,15 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class GalleryItem extends Model
 {
     protected $fillable = [
-        'image',
-        'caption',
+        'title',
+        'subtitle',
+        'text_kicker',
+
+        'images',
+
         'order',
-        'category',
         'is_active',
     ];
 
     protected $casts = [
-        'caption' => 'array',
+        'title' => 'array',
+        'subtitle' => 'array',
+        'text_kicker' => 'array',
+        'images' => 'array',
         'is_active' => 'boolean',
     ];
 }

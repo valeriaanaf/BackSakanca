@@ -19,12 +19,12 @@ class HeroForm
         return $schema
             ->components([
                 TextInput::make('title1')
-                    ->label('Heading Baris 1 (Fixed)')
+                    ->label('Heading Baris 1')
                     ->required()
                     ->maxLength(100),
 
                 TextInput::make('title2')
-                    ->label('Heading Baris 2 (Fixed)')
+                    ->label('Heading Baris 2')
                     ->required()
                     ->maxLength(100),
 
@@ -34,11 +34,11 @@ class HeroForm
                             ->schema([
                                 TextInput::make('subtitle.ID')->label('Subtitle (ID)')->required(),
                             ]),
-                        Tab::make('English')
+                        Tab::make('Inggris')
                             ->schema([
                                 TextInput::make('subtitle.EN')->label('Subtitle (EN)')->required(),
                             ]),
-                        Tab::make('日本語')
+                        Tab::make('Jepang')
                             ->schema([
                                 TextInput::make('subtitle.JPN')->label('Subtitle (JPN)')->required(),
                             ]),
@@ -62,9 +62,9 @@ class HeroForm
                     ->label('Background Slideshow')
                     ->schema([
                         FileUpload::make('src')
-                            ->label('Gambar Banner')
+                            ->label('Foto Background')
                             ->image()
-                            ->directory('hero-backgrounds')
+                            ->directory('heroes')
                             ->required(),
                         TextInput::make('alt')
                             ->label('Alt Text Gambar')

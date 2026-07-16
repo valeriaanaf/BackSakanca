@@ -16,35 +16,34 @@ class ServicesTable
     {
         return $table
             ->columns([
-                ImageColumn::make('image')
+                ImageColumn::make('logo')
                     ->label('Logo'),
-                TextColumn::make('title')
+
+                TextColumn::make('slug')
+                    ->label('Slug')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('name')
                     ->label('Nama Layanan')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
-                    ->searchable(),
+
                 TextColumn::make('col')
                     ->label('Posisi Kolom')
                     ->badge(),
+
                 IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean(),
+
                 TextColumn::make('order')
                     ->label('Urutan')
                     ->numeric()
                     ->sortable(),
             ])
             ->defaultSort('order')
-            ->filters([])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->recordActions([EditAction::make()])
+            ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])]);
     }
 }

@@ -15,35 +15,28 @@ class ServiceForm
     {
         return $schema
             ->components([
-                TextInput::make('title')
-                    ->label('Nama Layanan (Statis)')
-                    ->required()
-                    ->maxLength(100)
+                TextInput::make('name')
+                    ->label('Nama Service')
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn (string $operation, $state, callable $set) => 
-                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
-                    ),
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state)))
+                    ->required(),
 
                 TextInput::make('slug')
-                    ->label('URL Slug')
-                    ->required()
-                    ->unique(ignoreRecord: true),
+                    ->label('Slug')
+                    ->unique(ignoreRecord: true)
+                    ->required(),
 
-                FileUpload::make('image')
-                    ->label('Logo Kotak Layanan (Grid)')
+                FileUpload::make('logo')
+                    ->label('Logo')
                     ->image()
-                    ->directory('service-logos'),
-
-                TextInput::make('color')
-                    ->label('Gradient Color Fallback')
-                    ->placeholder('from-amber-400 to-orange-500'),
+                    ->directory('service-logos')
+                    ->required(),
 
                 Select::make('col')
                     ->label('Posisi Kolom Grid')
-                    ->options([
-                        'left' => 'Kiri (Left)',
-                        'right' => 'Kanan (Right)',
-                    ])->required(),
+                    ->options(['left' => 'Left', 'right' => 'Right'])
+                    ->default('left')
+                    ->required(),
 
                 TextInput::make('order')->numeric()->default(0),
                 Toggle::make('is_active')->default(true),

@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
@@ -20,11 +21,17 @@ class DetailedServiceForm
             ->components([
                 Select::make('service_id')
                     ->label('Terhubung ke Service')
-                    ->options(fn () => Service::pluck('title', 'id'))
+                    ->options(fn () => Service::pluck('name', 'id'))
                     ->searchable()
                     ->required()
-                    ->unique(ignoreRecord: true)
+                    ->live()
                     ->helperText('Satu Service hanya boleh punya satu Detailed Service.'),
+
+                ImageEntry::make('logo_preview')
+                    ->label('Logo (otomatis ikut Service, tidak perlu upload ulang)')
+                    ->state(fn ($get) => Service::find($get('service_id'))?->logo)
+                    ->imageHeight(60)
+                    ->visible(fn ($get) => filled($get('service_id'))),
 
                 TextInput::make('title_line1')
                     ->label('Judul Baris 1')
@@ -35,7 +42,7 @@ class DetailedServiceForm
                     ->required()
                     ->maxLength(100),
 
-                FileUpload::make('bg_image')
+                FileUpload::make('background_image')
                     ->label('Background Image Slider')
                     ->image()
                     ->directory('detailed-service-backgrounds')
@@ -44,17 +51,11 @@ class DetailedServiceForm
                 Tabs::make('Deskripsi')
                     ->tabs([
                         Tab::make('Indonesia')
-                            ->schema([
-                                Textarea::make('description.ID')->label('Deskripsi (ID)')->required(),
-                            ]),
+                            ->schema([Textarea::make('description.ID')->label('Deskripsi (ID)')->required()]),
                         Tab::make('English')
-                            ->schema([
-                                Textarea::make('description.EN')->label('Description (EN)')->required(),
-                            ]),
+                            ->schema([Textarea::make('description.EN')->label('Description (EN)')->required()]),
                         Tab::make('日本語')
-                            ->schema([
-                                Textarea::make('description.JPN')->label('説明 (JPN)')->required(),
-                            ]),
+                            ->schema([Textarea::make('description.JPN')->label('説明 (JPN)')->required()]),
                     ])
                     ->columnSpanFull(),
 

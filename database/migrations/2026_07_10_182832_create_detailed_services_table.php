@@ -13,13 +13,18 @@ return new class extends Migration
     {
         Schema::create('detailed_services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->string('title_line1', 100);
-            $table->string('title_line2', 100);
-            $table->string('bg_image', 255);
-            $table->jsonb('description');
-            $table->integer('order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('service_id')->unique()->constrained('services')->onDelete('cascade');  // logo sakanca
+
+            $table->string('title_line1', 100);             // S A K A N C A
+            $table->string('title_line2', 100);             // contoh: [V I S U A L, D E V, T E C H, dll]
+
+            // untuk logo FK dengan service
+            $table->string('background_image', 255);        // background images per service
+            $table->jsonb('description');                   // deskripsi panjang
+
+            $table->integer('order')->default(0);           // urutan tampil
+            $table->boolean('is_active')->default(true);    // status aktif
+
             $table->timestamps();
         });
     }

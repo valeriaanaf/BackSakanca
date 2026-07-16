@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->string('client_name', 100);
-            $table->jsonb('content');
-            $table->integer('rating')->default(5);
-            $table->boolean('is_active')->default(true);
-            $table->integer('order')->default(0);
+
+            $table->string('client_name', 100);             // nama klien
+            $table->jsonb('content');                       // ulasan
+            $table->integer('rating')->default(5);          // rating
+
+            $table->integer('order')->default(0);           // urutan tampil
+            $table->boolean('is_active')->default(true);    // status aktif
             $table->timestamps();
         });
     }

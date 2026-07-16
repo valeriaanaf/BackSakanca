@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100); 
-            $table->string('slug', 100)->unique();
-            $table->string('image', 255)->nullable();
-            $table->string('color', 100)->nullable();
-            $table->enum('col', ['left', 'right'])->default('left');
-            $table->integer('order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->string('slug', 50)->unique();      // slug for URL routing
+
+            $table->string('name', 100)->unique();      // [Sakanca Visual, Sakanca Dev, dll]
+
+            $table->string('logo', 255);                // Logo per Sakanca
+            $table->enum('col', ['left', 'right'])->default('left');    // posisi kolom di halaman depan
+
+            $table->integer('order')->default(0);       // urutan tampil di halaman depan
+            $table->boolean('is_active')->default(true); // status aktif
             $table->timestamps();
         });
     }

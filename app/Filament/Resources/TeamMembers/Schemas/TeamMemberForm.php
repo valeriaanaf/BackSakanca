@@ -18,45 +18,35 @@ class TeamMemberForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Nama Depan / Utama')
+                    ->label('Nama Depan')
                     ->required()
                     ->maxLength(100),
 
                 TextInput::make('surname')
-                    ->label('Nama Belakang / Surname')
+                    ->label('Nama Belakang')
                     ->maxLength(100),
 
-                TextInput::make('username')
-                    ->label('Frontend Slug / ID (Contoh: tazar, valerian)')
-                    ->required()
-                    ->maxLength(100),
-
-                Tabs::make('Detail Narasi Multi-Bahasa')
+                Tabs::make('Deskripsi')
                     ->tabs([
-                        Tab::make('Indonesia')
-                            ->schema([
-                                TextInput::make('role.ID')->label('Jabatan (ID)')->required(),
-                                Textarea::make('description1.ID')->label('Deskripsi Paragraf 1 (ID)')->rows(3),
-                                Textarea::make('description2.ID')->label('Deskripsi Paragraf 2 (ID)')->rows(3),
-                            ]),
-                        Tab::make('English')
-                            ->schema([
-                                TextInput::make('role.EN')->label('Role/Position (EN)')->required(),
-                                Textarea::make('description1.EN')->label('Description Paragraph 1 (EN)')->rows(3),
-                                Textarea::make('description2.EN')->label('Description Paragraph 2 (EN)')->rows(3),
-                            ]),
-                        Tab::make('日本語')
-                            ->schema([
-                                TextInput::make('role.JPN')->label('役割/役職 (JPN)')->required(),
-                                Textarea::make('description1.JPN')->label('説明パラグラフ 1 (JPN)')->rows(3),
-                                Textarea::make('description2.JPN')->label('説明パラグラフ 2 (JPN)')->rows(3),
-                            ]),
+                        Tab::make('Indonesia')->schema([
+                            TextInput::make('focus.ID')->label('Fokus/Peran (ID)')->required(),
+                            Textarea::make('description1.ID')->label('Deskripsi Paragraf 1 (ID)')->rows(3),
+                            Textarea::make('description2.ID')->label('Deskripsi Paragraf 2 (ID)')->rows(3),
+                        ]),
+                        Tab::make('Inggris')->schema([
+                            TextInput::make('focus.EN')->label('Focus/Role (EN)')->required(),
+                            Textarea::make('description1.EN')->label('Deskripsi Paragraf 1 (EN)')->rows(3),
+                            Textarea::make('description2.EN')->label('Deskripsi Paragraf 2 (EN)')->rows(3),
+                        ]),
+                        Tab::make('Jepang')->schema([
+                            TextInput::make('focus.JPN')->label('役割 (JPN)')->required(),
+                            Textarea::make('description1.JPN')->label('Deskripsi Paragraf 1 (JPN)')->rows(3),
+                            Textarea::make('description2.JPN')->label('Deskripsi Paragraf 2 (JPN)')->rows(3),
+                        ]),
                     ])
                     ->columnSpanFull(),
 
-                TagsInput::make('skills')
-                    ->label('Daftar Skills (Tekan Enter/Koma)')
-                    ->placeholder('Tambah skill baru...'),
+                TagsInput::make('skills')->label('Skills / Tools')->required(),
 
                 TagsInput::make('focus')
                     ->label('Fokus Bidang Kerja')
@@ -66,12 +56,8 @@ class TeamMemberForm
                     ->label('Tools Utama (Format Teks)')
                     ->maxLength(100),
 
-                TagsInput::make('style')
-                    ->label('Gaya Kerja / Desain')
-                    ->placeholder('Tambah gaya...'),
-
                 FileUpload::make('photo')
-                    ->label('Foto Profil (Avatar)')
+                    ->label('Foto Profil')
                     ->image()
                     ->directory('team-photos'),
 
@@ -81,18 +67,18 @@ class TeamMemberForm
                     ->directory('team-backgrounds'),
 
                 TextInput::make('instagram_url')->label('Instagram URL')->url()->maxLength(255),
-                TextInput::make('github_url')->label('GitHub Profile URL')->url()->maxLength(255),
-                TextInput::make('linkedin_url')->label('LinkedIn Profile URL')->url()->maxLength(255),
-                TextInput::make('email')->label('Alamat Email (Format: papatazar@gmail.com)')->maxLength(255),
+                TextInput::make('github_url')->label('GitHub URL')->url()->maxLength(255),
+                TextInput::make('linkedin_url')->label('LinkedIn URL')->url()->maxLength(255),
+                TextInput::make('email')->label('Alamat Email (Format: valerian@gmail.com)')->maxLength(255),
 
                 TextInput::make('order')
-                    ->label('Urutan Urutan Tampilan')
+                    ->label('Urutan Tampilan')
                     ->required()
                     ->numeric()
                     ->default(0),
 
                 Toggle::make('is_active')
-                    ->label('Status Aktif')
+                    ->label('Status Profil Aktif (Ditampilkan)')
                     ->required()
                     ->default(true),
             ]);

@@ -18,7 +18,6 @@ class TeamMemberInfolist
                     ->schema([
                         TextEntry::make('name')->label('Nama Utama'),
                         TextEntry::make('surname')->label('Nama Belakang')->placeholder('-'),
-                        TextEntry::make('username')->label('Frontend ID Slug'),
                         TextEntry::make('tools')->label('Tools Murni')->placeholder('-'),
                         TextEntry::make('order')->label('No Urut Tampilan'),
                         IconEntry::make('is_active')->label('Status Aktif')->boolean(),
@@ -27,10 +26,6 @@ class TeamMemberInfolist
 
                 Section::make('Data Terjemahan (Role & Deskripsi)')
                     ->schema([
-                        TextEntry::make('role.ID')->label('Role (ID)'),
-                        TextEntry::make('role.EN')->label('Role (EN)'),
-                        TextEntry::make('role.JPN')->label('Role (JPN)'),
-
                         TextEntry::make('description1.ID')->label('Desc Paragraf 1 (ID)')->columnSpanFull(),
                         TextEntry::make('description1.EN')->label('Desc Paragraf 1 (EN)')->columnSpanFull(),
                         TextEntry::make('description1.JPN')->label('Desc Paragraf 1 (JPN)')->columnSpanFull(),
@@ -45,7 +40,6 @@ class TeamMemberInfolist
                     ->schema([
                         TextEntry::make('skills')->label('Daftar Keahlian/Skills (JSON Array)')->badge()->placeholder('-'),
                         TextEntry::make('focus')->label('Fokus Bidang (JSON Array)')->badge()->placeholder('-'),
-                        TextEntry::make('style')->label('Gaya Kerja (JSON Array)')->badge()->placeholder('-'),
                     ])
                     ->columns(3),
 

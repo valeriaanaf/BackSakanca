@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained('services')->onDelete('restrict');
-            $table->string('title', 200);
-            $table->jsonb('description');
-            $table->string('thumbnail', 255);
-            $table->string('url', 255)->nullable();
-            $table->integer('year');
-            $table->boolean('is_featured')->default(false);
-            $table->integer('order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('service_id')->constrained('services')->onDelete('restrict'); // -Sakanca
+            $table->jsonb('name');                        // nama proyek
+            $table->jsonb('description');                  // deskripsi panjang
+            $table->string('thumbnail', 255);              // gambar thumbnail
+            $table->string('url', 255)->nullable();         // link proyek (untuk dev)
+            $table->integer('order')->default(0);           // urutan tampil
+            $table->boolean('is_active')->default(true);     // status aktif
             $table->timestamps();
         });
     }
