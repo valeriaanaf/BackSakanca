@@ -13,7 +13,7 @@ class DetailedService extends Model
         'service_id',
         'title_line1',
         'title_line2',
-        'bg_image',
+        'background_image',
         'description',
         'order',
         'is_active',

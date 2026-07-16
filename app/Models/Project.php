@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Project extends Model
 {
+    protected $table = 'projects';
+
     protected $fillable = [
         'service_id',
-        'title',
+        'name',
         'description',
         'thumbnail',
         'url',
-        'year',
-        'is_featured',
         'order',
         'is_active',
     ];
 
     protected $casts = [
+        'name' => 'array',
         'description' => 'array',
-        'is_featured' => 'boolean',
         'is_active' => 'boolean',
     ];
 

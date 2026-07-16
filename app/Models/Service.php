@@ -11,10 +11,9 @@ class Service extends Model
     protected $table = 'services';
 
     protected $fillable = [
-        'title',
         'slug',
-        'image',
-        'color',
+        'name',
+        'logo',
         'col',
         'order',
         'is_active',
@@ -24,17 +23,11 @@ class Service extends Model
         'is_active' => 'boolean',
     ];
 
-    /**
-     * Relasi 1:1 ke DetailedService (dikelola di resource Filament terpisah)
-     */
     public function detailedService(): HasOne
     {
         return $this->hasOne(DetailedService::class);
     }
 
-    /**
-     * Relasi 1:banyak ke Portfolio Projects
-     */
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class);

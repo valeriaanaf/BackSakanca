@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateContactRequest;
 use App\Models\ContactMessage;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
-use App\Http\Requests\UpdateContactRequest;
 
 class ContactController extends Controller
 {
@@ -24,6 +23,7 @@ class ContactController extends Controller
     public function store(UpdateContactRequest $request)
     {
         ContactMessage::create($request->validated());
+
         return $this->success(null, 'Pesan kamu berhasil dikirim, terima kasih ya!');
     }
 

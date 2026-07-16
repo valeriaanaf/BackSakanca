@@ -2,28 +2,42 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateProjectRequest extends FormRequest
+class UpdateProjectRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'service_id' => ['required', 'exists:services,id'],
+
+            'name' => ['required', 'array'],
+            'name.ID' => ['required', 'string', 'max:200'],
+            'name.EN' => ['required', 'string', 'max:200'],
+            'name.JPN' => ['required', 'string', 'max:200'],
+
+            'description' => ['required', 'array'],
+            'description.ID' => ['required', 'string'],
+            'description.EN' => ['required', 'string'],
+            'description.JPN' => ['required', 'string'],
+
+            'thumbnail' => ['required', 'string', 'max:255'],
+            'url' => ['nullable', 'url', 'max:255'],
+
+            'order' => ['integer'],
+            'is_active' => ['boolean'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'service_id.required' => 'Project wajib terhubung ke salah satu Service.',
+            'name.ID.required' => 'Nama project bahasa Indonesia wajib diisi.',
+            'description.ID.required' => 'Deskripsi bahasa Indonesia wajib diisi.',
         ];
     }
 }

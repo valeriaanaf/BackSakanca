@@ -5,7 +5,9 @@ namespace App\Filament\Resources\GalleryItems;
 use App\Filament\Resources\GalleryItems\Pages\CreateGalleryItem;
 use App\Filament\Resources\GalleryItems\Pages\EditGalleryItem;
 use App\Filament\Resources\GalleryItems\Pages\ListGalleryItems;
+use App\Filament\Resources\GalleryItems\Pages\ViewGalleryItem;
 use App\Filament\Resources\GalleryItems\Schemas\GalleryItemForm;
+use App\Filament\Resources\GalleryItems\Schemas\GalleryItemInfolist;
 use App\Filament\Resources\GalleryItems\Tables\GalleryItemsTable;
 use App\Models\GalleryItem;
 use BackedEnum;
@@ -21,6 +23,11 @@ class GalleryItemResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'Gallery';
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return GalleryItemInfolist::configure($schema);
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -44,6 +51,7 @@ class GalleryItemResource extends Resource
         return [
             'index' => ListGalleryItems::route('/'),
             'create' => CreateGalleryItem::route('/create'),
+            'view' => ViewGalleryItem::route('/{record}'),
             'edit' => EditGalleryItem::route('/{record}/edit'),
         ];
     }

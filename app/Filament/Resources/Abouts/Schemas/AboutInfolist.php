@@ -30,7 +30,7 @@ class AboutInfolist
 
                 Section::make('Aset Gambar')
                     ->schema([
-                        ImageEntry::make('background_image')->label('Foto Tim'),
+                        ImageEntry::make('background_image')->label('Foto Background About'),
                     ]),
             ]);
     }

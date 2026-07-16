@@ -10,12 +10,12 @@ class Testimonial extends Model
         'client_name',
         'content',
         'rating',
-        'is_active',
         'order',
+        'is_active',
     ];
 
     protected $casts = [
-        'content'   => 'array',   // jsonb i18n
+        'content' => 'array',
         'is_active' => 'boolean',
     ];
 }

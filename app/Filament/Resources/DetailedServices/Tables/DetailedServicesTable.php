@@ -16,33 +16,31 @@ class DetailedServicesTable
     {
         return $table
             ->columns([
-                ImageColumn::make('bg_image')
+                ImageColumn::make('background_image')
                     ->label('Background'),
-                TextColumn::make('service.title')
+
+                TextColumn::make('service.name')
                     ->label('Service')
                     ->searchable()
                     ->sortable(),
+
                 TextColumn::make('title_line1')
                     ->label('Judul Baris 1'),
+
                 TextColumn::make('title_line2')
                     ->label('Judul Baris 2'),
+
                 IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean(),
+
                 TextColumn::make('order')
                     ->label('Urutan')
                     ->numeric()
                     ->sortable(),
             ])
             ->defaultSort('order')
-            ->filters([])
-            ->recordActions([
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->recordActions([EditAction::make()])
+            ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])]);
     }
 }

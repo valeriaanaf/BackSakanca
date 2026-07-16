@@ -13,20 +13,21 @@ class DetailedServiceController extends Controller
 
     /**
      * Endpoint untuk DetailedServicesSection.tsx (Slider Detail) — Public
+     * Cuma ambil kolom 'logo' dari relasi Service, tanpa name/slug/title.
      */
     public function index()
     {
-        $details = DetailedService::with('service:id,slug')
+        $details = DetailedService::with('service:id,logo')
             ->where('is_active', true)
             ->orderBy('order', 'asc')
-            ->get(['id', 'service_id', 'title_line1', 'title_line2', 'description', 'bg_image']);
+            ->get(['id', 'service_id', 'title_line1', 'title_line2', 'description', 'background_image']);
 
         return $this->success($details);
     }
 
     public function show(DetailedService $detailedService)
     {
-        return $this->success($detailedService);
+        return $this->success($detailedService->load('service:id,logo'));
     }
 
     public function store(UpdateDetailedServiceRequest $request)

@@ -3,27 +3,50 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     use ApiResponse;
 
-    public function index(Request $request)
+    /**
+     * Endpoint untuk ProjectSection.tsx — Public
+     */
+    public function index()
     {
-        // Selalu ambil project yang aktif dan sertakan data relasi servicenya
-        $query = Project::with('service')->where('is_active', true);
-
-        // Jika frontend mengirim query ?featured=true atau ?featured=false
-        if ($request->has('featured')) {
-            $isFeatured = filter_var($request->featured, FILTER_VALIDATE_BOOLEAN);
-            $query->where('is_featured', $isFeatured);
-        }
-
-        $projects = $query->orderBy('order', 'asc')->get();
+        $projects = Project::with('service:id,name')
+            ->where('is_active', true)
+            ->orderBy('order', 'asc')
+            ->get();
 
         return $this->success($projects, 'Data projects berhasil diambil');
+    }
+
+    public function show(Project $project)
+    {
+        return $this->success($project->load('service:id,name'));
+    }
+
+    public function store(UpdateProjectRequest $request)
+    {
+        $project = Project::create($request->validated());
+
+        return $this->success($project, 'Project berhasil dibuat', 201);
+    }
+
+    public function update(UpdateProjectRequest $request, Project $project)
+    {
+        $project->update($request->validated());
+
+        return $this->success($project, 'Project berhasil diperbarui');
+    }
+
+    public function destroy(Project $project)
+    {
+        $project->delete();
+
+        return $this->success(null, 'Project berhasil dihapus');
     }
 }

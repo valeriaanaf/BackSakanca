@@ -2,28 +2,30 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateTestimonialRequest extends FormRequest
+class UpdateTestimonialRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'client_name' => ['required', 'string', 'max:100'],
+
+            'content' => ['required', 'array'],
+            'content.ID' => ['required', 'string'],
+            'content.EN' => ['required', 'string'],
+            'content.JPN' => ['required', 'string'],
+
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
+
+            'order' => ['integer'],
+            'is_active' => ['boolean'],
         ];
     }
 }

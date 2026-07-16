@@ -16,16 +16,16 @@ class AboutForm
         return $schema
             ->components([
                 TextInput::make('title1')
-                    ->label('Heading Utama (Fixed)')
+                    ->label('Heading Utama')
                     ->required()
                     ->maxLength(100),
 
                 TextInput::make('title2')
-                    ->label('Sub-Heading Utama (Fixed)')
+                    ->label('Sub-Heading Utama')
                     ->required()
                     ->maxLength(100),
 
-                Tabs::make('Deskripsi Perusahaan Multi-Bahasa')
+                Tabs::make('Deskripsi Multi-Bahasa')
                     ->tabs([
                         Tab::make('Indonesia')
                             ->schema([
@@ -34,17 +34,17 @@ class AboutForm
                                     ->rows(5)
                                     ->required(),
                             ]),
-                        Tab::make('English')
+                        Tab::make('Inggris')
                             ->schema([
                                 Textarea::make('description.EN')
-                                    ->label('Full Description (EN)')
+                                    ->label('Deskripsi Lengkap (EN)')
                                     ->rows(5)
                                     ->required(),
                             ]),
-                        Tab::make('日本語')
+                        Tab::make('Jepang')
                             ->schema([
                                 Textarea::make('description.JPN')
-                                    ->label('詳細説明 (JPN)')
+                                    ->label('Deskripsi Lengkap (JPN)')
                                     ->rows(5)
                                     ->required(),
                             ]),
@@ -56,9 +56,9 @@ class AboutForm
                     ->maxLength(255),
 
                 FileUpload::make('background_image')
-                    ->label('Foto Bersama Tim (Background)')
+                    ->label('Foto Background About')
                     ->image()
-                    ->directory('about-backgrounds'),
+                    ->directory('about'),
             ]);
     }
 }

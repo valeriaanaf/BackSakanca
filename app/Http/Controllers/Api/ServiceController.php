@@ -18,7 +18,7 @@ class ServiceController extends Controller
     {
         $services = Service::where('is_active', true)
             ->orderBy('order', 'asc')
-            ->get(['id', 'title', 'slug', 'image', 'color', 'col']);
+            ->get(['id', 'slug', 'name', 'logo', 'col']);
 
         return $this->success($services);
     }

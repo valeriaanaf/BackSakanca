@@ -20,8 +20,8 @@ class UpdateAboutRequest extends BaseRequest
             'description.EN' => ['required', 'string'],
             'description.JPN' => ['required', 'string'],
 
-            'logo' => ['nullable', 'string', 'max:255'],
-            'background_image' => ['nullable', 'string', 'max:255'],
+            'logo' => ['required', 'string', 'max:255'],
+            'background_image' => ['required', 'string', 'max:255'],
         ];
     }
 }

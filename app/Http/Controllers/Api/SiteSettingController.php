@@ -16,9 +16,10 @@ class SiteSettingController extends Controller
         * Dikembalikan sebagai object [key: value] agar mudah dipakai FE, bukan array of object
     */
 
-    public function indec()
+    public function index()
     {
         $settings = SiteSetting::pluck('value', 'key');
+
         return $this->success($settings);
     }
 
