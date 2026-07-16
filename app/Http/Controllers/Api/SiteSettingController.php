@@ -11,24 +11,25 @@ class SiteSettingController extends Controller
 {
     use ApiResponse;
 
-    /*
-        * Endpoint untuk Navbar.tsx & Footer.tsx -- public
-        * Dikembalikan sebagai object [key: value] agar mudah dipakai FE, bukan array of object
-    */
-
+    /**
+     * Endpoint untuk Navbar.tsx & Footer.tsx — Public
+     * Sama seperti Hero: ambil 1 baris singleton.
+     */
     public function index()
     {
-        $settings = SiteSetting::pluck('value', 'key');
+        $settings = SiteSetting::first();
+
+        if (! $settings) {
+            return $this->error('Site settings belum tersedia', null, 404);
+        }
 
         return $this->success($settings);
     }
 
-    // Admin update satu key spesifik, contoh: PUT admin/settings/footer_email
-    public function update(UpdateSiteSettingRequest $request, string $key)
+    public function update(UpdateSiteSettingRequest $request, SiteSetting $siteSetting)
     {
-        $setting = SiteSetting::where('key', $key)->firstOrFail();
-        $setting->update($request->validated());
+        $siteSetting->update($request->validated());
 
-        return $this->success($setting, 'Site setting berhasil diperbarui');
+        return $this->success($siteSetting, 'Site setting berhasil diperbarui');
     }
 }

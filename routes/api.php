@@ -39,7 +39,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         Route::put('/hero/{hero}', [HeroController::class, 'update']);
         Route::put('/about/{about}', [AboutController::class, 'update']);
-        Route::put('/settings', [SiteSettingController::class, 'update']);
+        Route::put('/settings/{siteSetting}', [SiteSettingController::class, 'update']);
 
         // CRUD Data Dinamis Konten
         Route::apiResource('team-members', TeamMemberController::class)->except(['index', 'show']);

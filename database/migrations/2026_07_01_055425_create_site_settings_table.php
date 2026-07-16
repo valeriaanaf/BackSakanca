@@ -7,22 +7,32 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Redesain dari pola key-value jadi singleton bernama,
+     * konsisten dengan hero_sections/about_sections/gallery_items.
      */
     public function up(): void
     {
+        Schema::dropIfExists('site_settings');
+
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key', 255)->unique();
+            $table->string('site_name', 100);
+            $table->string('footer_copyright', 255)->nullable();
 
-            $table->text('value')->nullable();
+            $table->string('social_instagram', 255)->nullable();
+            $table->string('social_tiktok', 255)->nullable();
+            $table->string('social_linkedin', 255)->nullable();
+            $table->string('contact_email', 255)->nullable();
+            $table->string('contact_phone', 20)->nullable();
+
+            $table->string('services_section_bg', 255)->nullable();
+            $table->string('projects_section_bg', 255)->nullable();
+            $table->string('testimonials_section_bg', 255)->nullable();
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('site_settings');
