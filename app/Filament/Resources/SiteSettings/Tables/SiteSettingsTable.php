@@ -13,6 +13,7 @@ class SiteSettingsTable
         return $table
             ->columns([
                 TextColumn::make('site_name')->label('Nama Situs'),
+                TextColumn::make('site_logo')->label('Logo Situs'),
                 TextColumn::make('contact_email')->label('Email Kontak'),
                 TextColumn::make('updated_at')->label('Terakhir Diubah')->dateTime(),
             ])

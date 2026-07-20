@@ -19,6 +19,17 @@ class SiteSettingForm
                             ->label('Nama Situs')
                             ->required()
                             ->maxLength(100),
+
+                        FileUpload::make('site_logo')
+                            ->label('Logo Situs')
+                            ->image()
+                            ->directory('settings/logo')
+                            ->imageAspectRatio('1:1')
+                            ->automaticallyResizeImagesToWidth('400')
+                            ->automaticallyResizeImagesMode('contain')
+                            ->maxSize(2048)
+                            ->helperText('💡 Maksimal 2 MB (Format PNG / WebP transparan).'),
+
                         TextInput::make('footer_copyright')
                             ->label('Teks Copyright Footer')
                             ->placeholder('© Sakanca Alliance 2026')
@@ -41,15 +52,32 @@ class SiteSettingForm
                         FileUpload::make('services_section_bg')
                             ->label('Background Section Services')
                             ->image()
-                            ->directory('site-settings-backgrounds'),
+                            ->directory('settings-backgrounds')
+                            ->imageAspectRatio('16:9')
+                            ->automaticallyResizeImagesToWidth('1920')
+                            ->automaticallyResizeImagesMode('cover')
+                            ->maxSize(5120)
+                            ->helperText('⚠️ Ukuran file maksimal 5 MB (Rasio 16:9). Sistem akan otomatis me-resize foto ke resolusi optimal 1080p.'),
+                        
                         FileUpload::make('projects_section_bg')
                             ->label('Background Section Projects')
                             ->image()
-                            ->directory('site-settings-backgrounds'),
+                            ->directory('settings/backgrounds')
+                            ->imageAspectRatio('16:9')
+                            ->automaticallyResizeImagesToWidth('1920')
+                            ->automaticallyResizeImagesMode('cover')
+                            ->maxSize(5120)
+                            ->helperText('⚠️ Ukuran file maksimal 5 MB (Rasio 16:9). Sistem akan otomatis me-resize foto ke resolusi optimal 1080p.'),
+                        
                         FileUpload::make('testimonials_section_bg')
                             ->label('Background Section Testimonials')
                             ->image()
-                            ->directory('site-settings-backgrounds'),
+                            ->directory('settings/backgrounds')
+                            ->imageAspectRatio('16:9')
+                            ->automaticallyResizeImagesToWidth('1920')
+                            ->automaticallyResizeImagesMode('cover')
+                            ->maxSize(5120)
+                            ->helperText('⚠️ Ukuran file maksimal 5 MB (Rasio 16:9). Sistem akan otomatis me-resize foto ke resolusi optimal 1080p.'),
                     ])
                     ->columns(3),
             ]);

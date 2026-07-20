@@ -59,12 +59,24 @@ class TeamMemberForm
                 FileUpload::make('photo')
                     ->label('Foto Profil')
                     ->image()
-                    ->directory('team-photos'),
+                    ->directory('team-photos')
+                    ->imageAspectRatio('4:5') 
+                    ->automaticallyResizeImagesToWidth('600')
+                    ->automaticallyResizeImagesMode('cover')
+                    ->maxSize(5120)
+                    ->helperText('⚠️ Maksimal 5 MB (Rasio 4:5 / Potret). Pastikan wajah berada di tengah.')
+                    ->required(),
 
                 FileUpload::make('background_image')
                     ->label('Background Banner Slideshow')
                     ->image()
-                    ->directory('team-backgrounds'),
+                    ->directory('team-backgrounds')
+                    ->imageAspectRatio('16:9')
+                    ->automaticallyResizeImagesToWidth('1920')
+                    ->automaticallyResizeImagesMode('cover')
+                    ->maxSize(5120)
+                    ->helperText('⚠️ Maksimal 5 MB (Rasio 16:9).')
+                    ->required(),
 
                 TextInput::make('instagram_url')->label('Instagram URL')->url()->maxLength(255),
                 TextInput::make('github_url')->label('GitHub URL')->url()->maxLength(255),

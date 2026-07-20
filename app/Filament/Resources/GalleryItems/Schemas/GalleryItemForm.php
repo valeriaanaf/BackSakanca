@@ -47,6 +47,11 @@ class GalleryItemForm
                             ->label('Gambar')
                             ->image()
                             ->directory('gallery')
+                            ->imageAspectRatio('16:9')
+                            ->automaticallyResizeImagesToWidth('1200')
+                            ->automaticallyResizeImagesMode('cover')
+                            ->maxSize(5120)
+                            ->helperText('⚠️ Maksimal 5 MB per foto (Rasio 16:9).')
                             ->required(),
                         TextInput::make('alt')
                             ->label('Alt Text (deskripsi gambar)')

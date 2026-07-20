@@ -60,7 +60,12 @@ class ProjectForm
                 FileUpload::make('thumbnail')
                     ->label('Thumbnail')
                     ->image()
-                    ->directory('project-thumbnails')
+                    ->directory('projects/thumbnails')
+                    ->imageAspectRatio('16:9')
+                    ->automaticallyResizeImagesToWidth('1200')
+                    ->automaticallyResizeImagesMode('cover')
+                    ->maxSize(5120)
+                    ->helperText('⚠️ Maksimal 5 MB (Rasio 16:9).')
                     ->required(),
 
                 TextInput::make('url')

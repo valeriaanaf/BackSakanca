@@ -13,7 +13,9 @@ class UpdateSiteSettingRequest extends BaseRequest
     {
         return [
             'site_name' => ['required', 'string', 'max:100'],
+            'site_logo' => ['nullable', 'string', 'max:255'],
             'footer_copyright' => ['nullable', 'string', 'max:255'],
+            
             'social_instagram' => ['nullable', 'string', 'max:255'],
             'social_tiktok' => ['nullable', 'string', 'max:255'],
             'social_linkedin' => ['nullable', 'string', 'max:255'],

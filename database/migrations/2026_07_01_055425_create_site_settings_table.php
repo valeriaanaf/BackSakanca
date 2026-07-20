@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
             $table->string('site_name', 100);
+            $table->string('site_logo', 255);
             $table->string('footer_copyright', 255)->nullable();
 
             $table->string('social_instagram', 255)->nullable();

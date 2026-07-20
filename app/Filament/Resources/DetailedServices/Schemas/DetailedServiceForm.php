@@ -45,7 +45,12 @@ class DetailedServiceForm
                 FileUpload::make('background_image')
                     ->label('Background Image Slider')
                     ->image()
-                    ->directory('detailed-service-backgrounds')
+                    ->directory('detailed-service')
+                    ->imageAspectRatio('16:9')
+                    ->automaticallyResizeImagesToWidth('1920')
+                    ->automaticallyResizeImagesMode('cover')
+                    ->maxSize(5120) // Validasi server max 5 MB (5120 KB)
+                    ->helperText('⚠️ Ukuran file maksimal 5 MB (Rasio 16:9). Sistem akan otomatis me-resize foto ke resolusi optimal 1080p.')
                     ->required(),
 
                 Tabs::make('Deskripsi')

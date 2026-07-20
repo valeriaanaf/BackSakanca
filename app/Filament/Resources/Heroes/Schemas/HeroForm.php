@@ -65,6 +65,11 @@ class HeroForm
                             ->label('Foto Background')
                             ->image()
                             ->directory('heroes')
+                            ->imageAspectRatio('16:9')
+                            ->automaticallyResizeImagesToWidth('1920')
+                            ->automaticallyResizeImagesMode('cover')
+                            ->maxSize(5120)
+                            ->helperText('⚠️ Maksimal 5 MB (Rasio 16:9).')
                             ->required(),
                         TextInput::make('alt')
                             ->label('Alt Text Gambar')

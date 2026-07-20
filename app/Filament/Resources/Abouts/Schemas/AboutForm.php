@@ -51,14 +51,28 @@ class AboutForm
                     ])
                     ->columnSpanFull(),
 
-                TextInput::make('logo')
-                    ->label('Logo Identifier')
-                    ->maxLength(255),
+                FileUpload::make('logo')
+                    ->label('Logo Identifier (Opsional)')
+                    ->image()
+                    ->directory('logos')
+                    ->imageAspectRatio('1:1')
+                    ->automaticallyResizeImagesToWidth('400')
+                    ->automaticallyResizeImagesMode('contain')
+                    ->maxSize(2048)
+                    ->helperText('💡 Kosongkan jika ingin menggunakan logo default Sakanca Alliance.')
+                    ->nullable(),
 
                 FileUpload::make('background_image')
                     ->label('Foto Background About')
                     ->image()
-                    ->directory('about'),
-            ]);
+                    ->directory('about')
+                    ->imageAspectRatio('16:9')
+                    ->automaticallyResizeImagesToWidth('1920')
+                    ->automaticallyResizeImagesMode('cover')
+                    ->maxSize(5120)
+                    ->helperText('⚠️ Maksimal 5 MB (Rasio 16:9). Gambar otomatis di-resize ke resolusi 1080p.')
+                    ->required(),
+            ]
+        );
     }
 }

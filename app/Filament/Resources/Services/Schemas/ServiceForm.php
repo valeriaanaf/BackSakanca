@@ -29,7 +29,12 @@ class ServiceForm
                 FileUpload::make('logo')
                     ->label('Logo')
                     ->image()
-                    ->directory('service-logos')
+                    ->directory('logos')
+                    ->imageAspectRatio('1:1')
+                    ->automaticallyResizeImagesToWidth('400')
+                    ->automaticallyResizeImagesMode('contain')
+                    ->maxSize(2048)
+                    ->helperText('💡 Ukuran file maksimal 2 MB (Rasio 1:1 / Persegi). Disarankan menggunakan format PNG transparan atau WebP.')
                     ->required(),
 
                 Select::make('col')
