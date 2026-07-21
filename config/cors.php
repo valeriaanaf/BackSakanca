@@ -13,7 +13,10 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        env('FRONTEND_URL', 'https://front-sakanca.vercel.app'),
+        'https://sakanca.com',
+        'https://www.sakanca.com',
+        'https://front-sakanca.vercel.app',
+        'http://localhost:3000',
     ],
 
     'allowed_origins_patterns' => [],
@@ -24,6 +27,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];
