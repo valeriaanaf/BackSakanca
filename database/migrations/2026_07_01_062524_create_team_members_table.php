@@ -15,29 +15,29 @@ return new class extends Migration
             $table->id();
 
             // Nama depan dan nama belakang
-            $table->string('name', 100);     // TAZAR
-            $table->string('surname', 100); // Al Ghaffar
+            $table->string('name', 100);     // VALERIAN
+            $table->string('surname', 100); // AHMAD FAUZIAN
 
             // Lokalisasi Multi-Bahasa (JSONB)
-            $table->jsonb('focus');         // Creative Developer & Visual Storyteller
-            $table->jsonb('description1');  // Kreator kreatif yang memadukan..
-            $table->jsonb('description2');  // Front-end developer yang..
+            $table->jsonb('focus');         // Full-Stack Developer & Technical Leader
+            $table->jsonb('description1');  // Saya adalah Full-Stack Developer dan...
+            $table->jsonb('description2');  // Saya Saya mengintegrasikan keahlian engineering, analisis...
 
             // Array Data Teknis (JSONB)
-            $table->jsonb('skills');        // ["After Effects","Capcut Pro","Canva", dll]
+            $table->jsonb('skills');        // ["Laravel","Next.js","PostgreSQL", dll]
 
             // Aset Media Gambar
-            $table->string('photo', 255);            // profile foto
-            $table->string('background_image', 255); // background foto
+            $table->string('photo', 255);            // Profile foto
+            $table->string('background_image', 255); // Background foto
 
             // Tautan Sosial Media & Kontak
-            $table->string('instagram_url', 255)->nullable();   // link ig
-            $table->string('email', 255)->nullable();           // link email
-            $table->string('github_url', 255)->nullable();      // link github
-            $table->string('linkedin_url', 255)->nullable();    // link linkedin (nullable)
+            $table->string('instagram_url', 255)->nullable();   // Link Instagram (nullable)
+            $table->string('email', 255)->nullable();           // Link Email (nullable)
+            $table->string('github_url', 255)->nullable();      // Link Github (nullable)
+            $table->string('linkedin_url', 255)->nullable();    // Link LinkedIn (nullable)
 
-            $table->integer('order')->default(0);               // urutan tampil
-            $table->boolean('is_active')->default(true);        // status aktif
+            $table->integer('order')->default(0);               // Urutan tampil anggota tim
+            $table->boolean('is_active')->default(true);        // Status aktif anggota tim (default: true)
             $table->timestamps();
         });
     }
